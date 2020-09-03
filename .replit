@@ -1,1 +1,2 @@
 language = "cpp"
+run="mkdir -p ../build; cd ../build; cmake ../acc-cosc-1337-fall-2020-tyler-carr1/; make; cd src/homework/01_variables; ./hw_01_exe;"
