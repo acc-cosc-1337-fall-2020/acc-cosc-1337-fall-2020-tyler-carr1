@@ -13,7 +13,7 @@ int main()
 	
 
 std::cout<<add_numbers(5,5);
-std::cout<<add_numbers(10,10);
+//std::cout<<add_numbers(10,10);
 
 	return 0;
 }
