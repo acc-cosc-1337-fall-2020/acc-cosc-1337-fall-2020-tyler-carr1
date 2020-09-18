@@ -18,7 +18,6 @@ int main()
   cout<<result;
   result = multiply_numbers(num1);
   cout<<"\n"<<result<<"\n";
-
-	return 0;
+  
+  return 0;
 }
-
