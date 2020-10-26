@@ -9,6 +9,23 @@ TEST_CASE("Verify Test Configuration", "verification") {
 TEST_CASE("Test Game")
 {
   TicTacToe p;
-  REQUIRE(p.start_game("X")=="X");
-  REQUIRE(p.mark_board(1)==false);
+  
+  p.mark_board(1);
+  REQUIRE(p.game_over() == false);
+  p.mark_board(2);
+  REQUIRE(p.game_over() == false);
+  p.mark_board(3);
+  REQUIRE(p.game_over() == false);
+  p.mark_board(4);
+  REQUIRE(p.game_over() == false);
+  p.mark_board(5);
+  REQUIRE(p.game_over() == false);
+  p.mark_board(6);
+  REQUIRE(p.game_over() == false);
+  p.mark_board(7);
+  REQUIRE(p.game_over() == false);
+  p.mark_board(8);
+  REQUIRE(p.game_over() == false);
+  p.mark_board(9);
+  REQUIRE(p.game_over() == true);
 }

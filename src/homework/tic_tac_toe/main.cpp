@@ -20,7 +20,6 @@ int main()
   do
   {
     //setting loop veriables
-    TicTacToe swap;
     int position;
     
     //prompting user for position on board (no validation)
@@ -34,7 +33,7 @@ int main()
     //validating if game is Over
     end_game = p.game_over();
 
-  }while(end_game==true);
+  }while(end_game==false);
   
   cout<<"Game over, thank you for playing!\n";
 
