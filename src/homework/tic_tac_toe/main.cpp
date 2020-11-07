@@ -1,4 +1,5 @@
 #include "tic_tac_toe.h"
+#include "tic_tac_toe_manager.h"
 #include<iostream>
 #include<string>
 
@@ -8,6 +9,7 @@ int main()
 {
   //set variables
   TicTacToe p;
+  TicTacToeManager m;
   string starting_player;
   string winning_player;
   char choice;
@@ -23,16 +25,11 @@ int main()
     p.start_game(starting_player);
     do
     {
-      //setting loop veriables
-      int position;
+      //calling overloaded operator for input
+      cin>>p;
       
-      //prompting user for position on board (no validation)
-      cout<<"\nEnter a position from 1 to 9: ";
-      cin>>position;
-
-      //setting and displaying board with entered position
-      p.mark_board(position);
-      p.display_board();
+      //calling overloaded operator for output
+      cout<<p;
 
       //validating if game is Over
       end_game = p.game_over();
@@ -46,6 +43,11 @@ int main()
     cout<<"\n";
 
   }while(choice == 'y' || choice == 'Y');
+  
+  m.save_game(p);
+
+  cout<<m;
+  
 
 	return 0;
 }
