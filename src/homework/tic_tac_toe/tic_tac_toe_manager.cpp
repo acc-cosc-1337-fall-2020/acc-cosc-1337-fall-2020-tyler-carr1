@@ -29,10 +29,9 @@ void TicTacToeManager::update_winner_count(string winner)
 
 std::ostream& operator<<(std::ostream& out, const TicTacToeManager& manager)
 {
-  TicTacToe t;
   for(std::size_t i = 0; i < manager.games.size(); i++)
   {
-    t.display_board();
+    out<<manager.games[i];
   }
   return out;
 }

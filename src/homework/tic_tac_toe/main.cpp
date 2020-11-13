@@ -38,13 +38,18 @@ int main()
     
     winning_player = p.get_winner();
 
+    m.save_game(p);
     cout<<"Game over, the winner is: "<<winning_player<<"\n"<<"Would you like to play again?";
     cin>>choice;
     cout<<"\n";
 
   }while(choice == 'y' || choice == 'Y');
   
-  m.save_game(p);
+  int x;
+  int o;
+  int t;
+
+  m.get_winner_total(x, o, t);
 
   cout<<m;
   
