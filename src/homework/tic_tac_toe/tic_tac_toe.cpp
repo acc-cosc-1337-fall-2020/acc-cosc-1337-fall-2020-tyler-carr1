@@ -102,30 +102,39 @@ void TicTacToe::set_winner()
   }
 }
 
-std::ostream& operator<<(std::ostream& out, const TicTacToe& t)
+std::ostream& operator<<(std::ostream& out, const TicTacToe& game)
 { 
-  for(std::size_t i = 0; i < t.pegs.size(); i +=3)
-  {
-    if(t.pegs.size() == 9)
-    {
-      out<<t.pegs[i]<<"|"<<t.pegs[i+1]<<"|"<<t.pegs[i+2]<<"\n";
-    }
-    else if(t.pegs.size() == 16)
-    {
-      out<<t.pegs[i]<<"|"<<t.pegs[i+1]<<"|"<<t.pegs[i+2]<<"|"<<t.pegs[i+3]<<"\n";
-    }
-  }
+  out<<"Winner: "<<game.get_winner()<<"\n";
 
+  for (std::size_t i = 0; i < game.pegs.size(); i += sqrt(game.pegs.size()))
+	{		
+		out << game.pegs[i] << "|" << game.pegs[i + 1] << "|" << game.pegs[i + 2];			
+
+		if (game.pegs.size() == 16)
+		{
+			out << "|" << game.pegs[i + 3];
+		}
+
+    out << "\n";
+	}		
+
+  out << "\n";
   return out;
 }
 
-std::istream& operator>>(std::istream& i, TicTacToe& t)
+std::istream& operator>>(std::istream& in, TicTacToe& game)
 {
-  int position;
-  cout<<"\nEnter a position from 1 to 9: ";
-  i>>position;
+  unsigned int position;
+  cout<<"Enter position from 1 to "<<game.pegs.size();
+  in>>position;
 
-  t.mark_board(position);
+  while(!in.good() || (position < 1 || position > game.pegs.size()))
 
-  return i;
+  cout<<"Enter position from 1 to "<<game.pegs.size();
+
+  in>>position;
+  
+  game.mark_board(position);
+
+  return in;
 }

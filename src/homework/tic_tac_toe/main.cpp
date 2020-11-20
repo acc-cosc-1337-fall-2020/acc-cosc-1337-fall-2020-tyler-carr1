@@ -1,58 +1,77 @@
 #include "tic_tac_toe.h"
+#include "tic_tac_toe_3.h"
+#include "tic_tac_toe_4.h"
 #include "tic_tac_toe_manager.h"
-#include<iostream>
-#include<string>
+#include<limits>
+#include<memory>
 
-using std::cout, std::cin, std::string;
+using std::cout, std::cin;
 
 int main() 
 {
   //set variables
-  TicTacToe p;
-  TicTacToeManager m;
-  string starting_player;
-  string winning_player;
-  char choice;
-  bool end_game = false;
+  TicTacToeManager manager;
+	std::unique_ptr<TicTacToe> tic_tac_toe;
+	std::string player;
 
-  do
-  {
-    //prompt user for player choice
-    cout<<"Enter which player you are (X or O): ";
-    cin>>starting_player;
+	char choice;
+	int game_type;
 
-    //set first player
-    p.start_game(starting_player);
-    do
-    {
-      //calling overloaded operator for input
-      cin>>p;
-      
-      //calling overloaded operator for output
-      cout<<p;
+	do
+	{
+		cout<<"Enter 3 or 4: ";
+		cin>>game_type;
 
-      //validating if game is Over
-      end_game = p.game_over();
+		while(!cin.good() || (game_type < 3 || game_type > 4))
+		{
+			cin.clear();
+			cin.ignore(5, '\n');
 
-    }while(end_game==false);
+			cout<<"Enter 3 or 4: ";
+			cin>>game_type;
+		}
+
+		if(game_type == 3)
+		{
+			tic_tac_toe = std::make_unique<TicTacToe3>();
+		}
+		else
+		{
+			tic_tac_toe = std::make_unique<TicTacToe4>();
+		}
+
+		while(player != "X" && player != "x" && player != "O" && player != "o")
+		{
+			cout<<"Enter X or O: ";
+			cin>>player;
+		}
+
+ 		tic_tac_toe->start_game(player);
+
+		do
+		{
+		  cin>>*tic_tac_toe;
+			cout<<*tic_tac_toe;
+
+ 		} while (tic_tac_toe->game_over() == false);
+
+ 		player = "";
+ 		cout<<"Game over the winner is: "<<tic_tac_toe->get_winner()<<"\n";
+
+		manager.save_game(tic_tac_toe);
+
+		int x_wins, o_wins, ties;
     
-    winning_player = p.get_winner();
+		manager.get_winner_totals(x_wins, o_wins, ties);
+		cout<<"X wins: "<<x_wins<<"\n";
+		cout<<"O wins: "<<o_wins<<"\n";
+		cout<<"Ties  : "<<ties<<"\n\n";
+		cout<<"Continue enter y or Y: ";
+		cin>>choice;
+	
+	}while(choice == 'Y' || choice == 'y');
 
-    m.save_game(p);
-    cout<<"Game over, the winner is: "<<winning_player<<"\n"<<"Would you like to play again?";
-    cin>>choice;
-    cout<<"\n";
-
-  }while(choice == 'y' || choice == 'Y');
-  
-  int x;
-  int o;
-  int t;
-
-  m.get_winner_total(x, o, t);
-
-  cout<<m;
-  
+	cout<<manager;
 
 	return 0;
 }
