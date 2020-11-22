@@ -8,6 +8,7 @@ class TicTacToe4: public TicTacToe
 {
 public:
     TicTacToe4() : TicTacToe(4){}
+    TicTacToe4(std::vector<string> p, string winner) : TicTacToes(p, winner) {}
 
 private:
     bool check_column_win() override;

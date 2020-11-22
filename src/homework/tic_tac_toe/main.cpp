@@ -61,7 +61,7 @@ int main()
 		manager.save_game(tic_tac_toe);
 
 		int x_wins, o_wins, ties;
-    
+
 		manager.get_winner_totals(x_wins, o_wins, ties);
 		cout<<"X wins: "<<x_wins<<"\n";
 		cout<<"O wins: "<<o_wins<<"\n";
